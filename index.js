@@ -9,6 +9,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _lodash = _interopRequireDefault(require("lodash"));
+
 require("./style.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -53,7 +55,12 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var CronBuilder = require('cron-builder');
+var CronBuilder = require('cron-builder'); // This component helps user to build cron expressions. We have built this component on top of
+// npm package: cron builder. We take the user inputs and then use the cron builder class and its
+// methods to generate the cron expression.
+// props:
+// getCronExpression: PropTypes.func // Call back function to be called on toggle
+
 
 var CronJob = /*#__PURE__*/function (_Component) {
   _inherits(CronJob, _Component);
@@ -67,399 +74,273 @@ var CronJob = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
-    _defineProperty(_assertThisInitialized(_this), "frequencyOptionsList", [// We have to get this list as props and use whatever frequency values we need
-    // as per the requirements. Currently we only need the following
-    {
-      label: 'Minute',
-      value: 'minute',
-      index: 0
-    }, {
-      label: 'Hour',
-      value: 'hour',
-      index: 1
-    }, {
-      label: 'Day',
-      value: 'day',
-      index: 2
-    }, {
-      label: 'Week',
-      value: 'week',
-      index: 3
-    }, {
-      label: 'Month',
-      value: 'month',
-      index: 4
-    }, {
-      label: 'Year',
-      value: 'year',
-      index: 5
-    }]);
-
     _defineProperty(_assertThisInitialized(_this), "minuteOptionsList", [{
       label: '0',
-      value: 0,
-      index: 0
+      value: 0
     }, {
       label: '5',
-      value: 5,
-      index: 1
+      value: 5
     }, {
       label: '10',
-      value: 10,
-      index: 2
+      value: 10
     }, {
       label: '15',
-      value: 15,
-      index: 3
+      value: 15
     }, {
       label: '20',
-      value: 20,
-      index: 4
+      value: 20
     }, {
       label: '25',
-      value: 25,
-      index: 5
+      value: 25
     }, {
       label: '30',
-      value: 30,
-      index: 6
+      value: 30
     }, {
       label: '35',
-      value: 35,
-      index: 7
+      value: 35
     }, {
       label: '40',
-      value: 40,
-      index: 8
+      value: 40
     }, {
       label: '45',
-      value: 45,
-      index: 9
+      value: 45
     }, {
       label: '50',
-      value: 50,
-      index: 10
+      value: 50
     }, {
       label: '55',
-      value: 55,
-      index: 11
+      value: 55
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "hourOptionsList", [{
       label: '0',
-      value: 0,
-      index: 0
+      value: 0
     }, {
       label: '1',
-      value: 1,
-      index: 1
+      value: 1
     }, {
       label: '2',
-      value: 2,
-      index: 2
+      value: 2
     }, {
       label: '3',
-      value: 3,
-      index: 3
+      value: 3
     }, {
       label: '4',
-      value: 4,
-      index: 4
+      value: 4
     }, {
       label: '5',
-      value: 5,
-      index: 5
+      value: 5
     }, {
       label: '6',
-      value: 6,
-      index: 6
+      value: 6
     }, {
       label: '7',
-      value: 7,
-      index: 7
+      value: 7
     }, {
       label: '8',
-      value: 8,
-      index: 8
+      value: 8
     }, {
       label: '9',
-      value: 9,
-      index: 9
+      value: 9
     }, {
       label: '10',
-      value: 10,
-      index: 10
+      value: 10
     }, {
       label: '11',
-      value: 11,
-      index: 11
+      value: 11
     }, {
       label: '12',
-      value: 12,
-      index: 12
+      value: 12
     }, {
       label: '13',
-      value: 13,
-      index: 13
+      value: 13
     }, {
       label: '14',
-      value: 14,
-      index: 14
+      value: 14
     }, {
       label: '15',
-      value: 15,
-      index: 15
+      value: 15
     }, {
       label: '16',
-      value: 16,
-      index: 16
+      value: 16
     }, {
       label: '17',
-      value: 17,
-      index: 17
+      value: 17
     }, {
       label: '18',
-      value: 18,
-      index: 18
+      value: 18
     }, {
       label: '19',
-      value: 19,
-      index: 19
+      value: 19
     }, {
       label: '20',
-      value: 20,
-      index: 20
+      value: 20
     }, {
       label: '21',
-      value: 21,
-      index: 21
+      value: 21
     }, {
       label: '22',
-      value: 22,
-      index: 22
+      value: 22
     }, {
       label: '23',
-      value: 23,
-      index: 23
+      value: 23
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "dayOptionsList", [{
       label: '1st',
-      value: 1,
-      index: 0
+      value: 1
     }, {
       label: '2nd',
-      value: 2,
-      index: 1
+      value: 2
     }, {
       label: '3rd',
-      value: 3,
-      index: 2
+      value: 3
     }, {
       label: '4th',
-      value: 4,
-      index: 3
+      value: 4
     }, {
       label: '5th',
-      value: 5,
-      index: 4
+      value: 5
     }, {
       label: '6th',
-      value: 6,
-      index: 5
+      value: 6
     }, {
       label: '7th',
-      value: 7,
-      index: 6
+      value: 7
     }, {
       label: '8th',
-      value: 8,
-      index: 7
+      value: 8
     }, {
       label: '9th',
-      value: 9,
-      index: 8
+      value: 9
     }, {
       label: '10th',
-      value: 10,
-      index: 9
+      value: 10
     }, {
       label: '11th',
-      value: 11,
-      index: 10
+      value: 11
     }, {
       label: '12th',
-      value: 12,
-      index: 11
+      value: 12
     }, {
       label: '13th',
-      value: 13,
-      index: 12
+      value: 13
     }, {
       label: '14th',
-      value: 14,
-      index: 13
+      value: 14
     }, {
       label: '15th',
-      value: 15,
-      index: 14
+      value: 15
     }, {
       label: '16th',
-      value: 16,
-      index: 15
+      value: 16
     }, {
       label: '17th',
-      value: 17,
-      index: 16
+      value: 17
     }, {
       label: '18th',
-      value: 18,
-      index: 17
+      value: 18
     }, {
       label: '19th',
-      value: 19,
-      index: 18
+      value: 19
     }, {
       label: '20th',
-      value: 20,
-      index: 20
+      value: 20
     }, {
       label: '21st',
-      value: 21,
-      index: 21
+      value: 21
     }, {
       label: '22nd',
-      value: 22,
-      index: 22
+      value: 22
     }, {
       label: '23rd',
-      value: 23,
-      index: 23
+      value: 23
     }, {
       label: '24th',
-      value: 24,
-      index: 24
+      value: 24
     }, {
       label: '25th',
-      value: 25,
-      index: 25
+      value: 25
     }, {
       label: '26th',
-      value: 26,
-      index: 26
+      value: 26
     }, {
       label: '27th',
-      value: 27,
-      index: 27
+      value: 27
     }, {
       label: '28th',
-      value: 28,
-      index: 28
+      value: 28
     }, {
       label: '29th',
-      value: 29,
-      index: 29
+      value: 29
     }, {
       label: '30th',
-      value: 30,
-      index: 30
+      value: 30
     }, {
       label: '31th',
-      value: 31,
-      index: 31
+      value: 31
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "weekOptionsList", [{
       label: 'Sunday',
-      value: 1,
-      index: 0
+      value: 1
     }, {
       label: 'Monday',
-      value: 2,
-      index: 1
+      value: 2
     }, {
       label: 'Tuesday',
-      value: 3,
-      index: 2
+      value: 3
     }, {
       label: 'Wednesday',
-      value: 4,
-      index: 3
+      value: 4
     }, {
       label: 'Thursday',
-      value: 5,
-      index: 4
+      value: 5
     }, {
       label: 'Friday',
-      value: 6,
-      index: 5
+      value: 6
     }, {
       label: 'Saturday',
-      value: 7,
-      index: 6
+      value: 7
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "monthOptionsList", [{
       label: 'January',
-      value: 1,
-      index: 0
+      value: 1
     }, {
       label: 'Febrauary',
-      value: 2,
-      index: 1
+      value: 2
     }, {
       label: 'March',
-      value: 3,
-      index: 2
+      value: 3
     }, {
       label: 'April',
-      value: 4,
-      index: 3
+      value: 4
     }, {
       label: 'May',
-      value: 5,
-      index: 4
+      value: 5
     }, {
       label: 'June',
-      value: 6,
-      index: 5
+      value: 6
     }, {
       label: 'July',
-      value: 7,
-      index: 6
+      value: 7
     }, {
       label: 'August',
-      value: 8,
-      index: 7
+      value: 8
     }, {
       label: 'September',
-      value: 9,
-      index: 8
+      value: 9
     }, {
       label: 'October',
-      value: 10,
-      index: 9
+      value: 10
     }, {
       label: 'November',
-      value: 11,
-      index: 10
+      value: 11
     }, {
       label: 'December',
-      value: 12,
-      index: 11
+      value: 12
     }]);
-
-    _defineProperty(_assertThisInitialized(_this), "highlightValueSelection", function (selectedList, refObject, optionsList) {
-      selectedList && selectedList.map(function (value) {
-        var optionObj = optionsList.find(function (obj) {
-          return obj.value.toString() === value;
-        });
-
-        if (refObject && optionObj !== undefined) {
-          refObject[optionObj.index].selected = true;
-        }
-      });
-    });
 
     _defineProperty(_assertThisInitialized(_this), "getOption", function (item, keyPrefix) {
       return /*#__PURE__*/_react["default"].createElement("option", {
@@ -475,9 +356,6 @@ var CronJob = /*#__PURE__*/function (_Component) {
         className: "form-control",
         id: "minute",
         name: "minute",
-        ref: function ref(select) {
-          _this.minuteRef = select;
-        },
         onChange: function onChange(e) {
           _this.updateScheduleConfiguration(e.target.options, 'minute');
         },
@@ -498,9 +376,6 @@ var CronJob = /*#__PURE__*/function (_Component) {
         className: "form-control",
         id: "hour",
         name: "hour",
-        ref: function ref(select) {
-          _this.hourRef = select;
-        },
         onChange: function onChange(e) {
           _this.updateScheduleConfiguration(e.target.options, 'hour');
         },
@@ -521,9 +396,6 @@ var CronJob = /*#__PURE__*/function (_Component) {
         className: "form-control",
         id: "day",
         name: "day",
-        ref: function ref(select) {
-          _this.dayRef = select;
-        },
         onChange: function onChange(e) {
           _this.updateScheduleConfiguration(e.target.options, 'day');
         },
@@ -544,9 +416,6 @@ var CronJob = /*#__PURE__*/function (_Component) {
         className: "form-control",
         id: "week",
         name: "week",
-        ref: function ref(select) {
-          _this.weekRef = select;
-        },
         onChange: function onChange(e) {
           _this.updateScheduleConfiguration(e.target.options, 'week');
         },
@@ -567,9 +436,6 @@ var CronJob = /*#__PURE__*/function (_Component) {
         className: "form-control",
         id: "month",
         name: "month",
-        ref: function ref(select) {
-          _this.monthRef = select;
-        },
         onChange: function onChange(e) {
           _this.updateScheduleConfiguration(e.target.options, 'month');
         },
@@ -580,7 +446,8 @@ var CronJob = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "displayDateTimePicker", function (selectedFrequency, displayMinuteFlag, displayHourFlag, displayDayFlag, displayWeekFlag, displayMonthFlag) {
-      var operationCronDictCopy = {};
+      var operationCronDictCopy = _lodash["default"].cloneDeep(_this.state.operationCronDict);
+
       operationCronDictCopy.showMinutePicker = displayMinuteFlag;
       operationCronDictCopy.showHourPicker = displayHourFlag;
       operationCronDictCopy.showDayPicker = displayDayFlag;
@@ -595,23 +462,20 @@ var CronJob = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "prepareCronExpression", function () {
       var cronExp = new CronBuilder();
-      _this.state.minuteSelectedList.length && cronExp.set('minute', _this.state.minuteSelectedList);
+      _this.state.minuteSeletedList.length && cronExp.set('minute', _this.state.minuteSeletedList);
       _this.state.hourSelectedList.length && cronExp.set('hour', _this.state.hourSelectedList);
       _this.state.daySelectedList.length && cronExp.set('dayOfTheMonth', _this.state.daySelectedList);
       _this.state.weekSelectedList.length && cronExp.set('dayOfTheWeek', _this.state.weekSelectedList);
       _this.state.monthSelectedList.length && cronExp.set('month', _this.state.monthSelectedList);
-      var cronInfoObj = {};
-      cronInfoObj.cronString = cronExp.build();
-      cronInfoObj.scheduleFrequency = _this.state.selectedFrequency;
 
-      _this.props.getCronInfo(cronInfoObj, _this.props.jobName);
+      _this.props.getCronExpression(cronExp.build(), _this.props.jobName);
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateSelectedValues", function (selectedValuesList, unitOfTime) {
       switch (unitOfTime) {
         case 'minute':
           _this.setState({
-            minuteSelectedList: selectedValuesList
+            minuteSeletedList: selectedValuesList
           }, function () {
             _this.prepareCronExpression();
           });
@@ -671,7 +535,7 @@ var CronJob = /*#__PURE__*/function (_Component) {
       _this.updateSelectedValues(selectedValuesList, unitOfTime);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "updateCronSelection", function (selectedFrequency) {
+    _defineProperty(_assertThisInitialized(_this), "handleCronSelection", function (selectedFrequency) {
       switch (selectedFrequency) {
         case 'minute':
           _this.displayDateTimePicker(selectedFrequency, false, false, false, false, false);
@@ -708,28 +572,6 @@ var CronJob = /*#__PURE__*/function (_Component) {
       }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleCronSelection", function (selectedFrequency) {
-      _this.minuteRef = undefined;
-      _this.hourRef = undefined;
-      _this.dayRef = undefined;
-      _this.weekRef = undefined;
-      _this.monthRef = undefined;
-      _this.yearRef = undefined; // reset selected values when the scheduled
-      // frequency is updated.
-
-      _this.setState({
-        minuteSelectedList: [],
-        hourSelectedList: [],
-        daySelectedList: [],
-        weekSelectedList: [],
-        monthSelectedList: [],
-        operationCronDict: {},
-        selectedFrequency: selectedFrequency
-      }, function () {
-        _this.updateCronSelection(selectedFrequency);
-      });
-    });
-
     _this.state = {
       // Display the date time pickers inputs
       // according to the  schedule frequency selected.
@@ -741,103 +583,28 @@ var CronJob = /*#__PURE__*/function (_Component) {
         showMonthPicker: false
       },
       // Maintain the user selected time values in state.
-      minuteSelectedList: [],
+      minuteSeletedList: [],
       hourSelectedList: [],
       daySelectedList: [],
       weekSelectedList: [],
       monthSelectedList: []
-    }; // Initializing refs for all the select
-    // components. This is needed to highlight
-    // selected values in date time picker select boxes
-    // for a given cron expression.
-
-    _this.frequencyRef = undefined;
-    _this.minuteRef = undefined;
-    _this.hourRef = undefined;
-    _this.dayRef = undefined;
-    _this.weekRef = undefined;
-    _this.monthRef = undefined;
-    _this.yearRef = undefined;
+    };
     return _this;
   }
 
   _createClass(CronJob, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
-      var _this2 = this;
-
-      if (this.props.frequency !== nextProps.frequency) {
-        // If cronstring is received as props,
-        // display the crontab with date and timepickers
-        // highlighted with selected values.
-        if (nextProps.cronString !== undefined && nextProps.cronString !== '') {
-          // cron string will be in the following format:
-          // < * * * * * >.
-          // Here the first star represents minute values
-          // second represents hour values.
-          // third represents day values.
-          // fourth represents month values.
-          // fifth represents week values.
-          // Example cron expressions:
-          // schedule job daily at 12 PM:  0 0 * * *
-          // schedule job every sunday at 9 AM and 6PM : 0 9,18 * * 0
-          var cronString = nextProps.cronString; // Get the values from cron expression and populate them
-          // in state
-
-          var cronValues = cronString && cronString.split(' ');
-          this.setState({
-            selectedFrequency: nextProps.frequency,
-            minuteSelectedList: cronValues && cronValues[0].split(',') || [],
-            hourSelectedList: cronValues && cronValues[1].split(',') || [],
-            daySelectedList: cronValues && cronValues[2].split(',') || [],
-            monthSelectedList: cronValues && cronValues[3].split(',') || [],
-            weekSelectedList: cronValues && cronValues[4].split(',') || []
-          }, function () {
-            // Show the date time pickers as per the schedule frequency
-            // selected.
-            console.log('selected frq', _this2.state.selectedFrequency);
-
-            _this2.updateCronSelection(_this2.state.selectedFrequency);
-          }); // When no cron expression is provided to the component,
-          // Use schedule frequency as 'day' by default.
-        } else {
-          this.updateCronSelection('day');
-          this.prepareCronExpression();
-        }
-      }
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      var _this3 = this;
-
-      // When cron expression is received as props
-      // we render the date time pickers according to the schedule
-      // frequency received and highlight the values in the select box
-      // as per the cron expression
-      if (this.state.selectedFrequency) {
-        var selectedOptionObj = this.frequencyOptionsList.find(function (row) {
-          return row.value === _this3.state.selectedFrequency;
-        });
-
-        if (this.frequencyRef) {
-          this.frequencyRef[selectedOptionObj.index].selected = true;
-        }
-      } // Hightlight the selected values in select box
-
-
-      this.highlightValueSelection(this.state.minuteSelectedList, this.minuteRef, this.minuteOptionsList);
-      this.highlightValueSelection(this.state.hourSelectedList, this.hourRef, this.hourOptionsList);
-      this.highlightValueSelection(this.state.daySelectedList, this.dayRef, this.dayOptionsList);
-      this.highlightValueSelection(this.state.monthSelectedList, this.monthRef, this.monthOptionsList);
-      this.highlightValueSelection(this.state.weekSelectedList, this.weekRef, this.weekOptionsList);
-    } // This is an option list used by
-    // frequency select box
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // Set default schedule frequency as 'minute'.
+      this.handleCronSelection('minute');
+      this.prepareCronExpression();
+    } // This is an options list used by
+    // minute picker select box.
 
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this2 = this;
 
       return /*#__PURE__*/_react["default"].createElement("div", {
         className: "cron-tab-container"
@@ -848,32 +615,31 @@ var CronJob = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/_react["default"].createElement("select", {
         className: "form-control cron-select",
         name: "cronSelect",
-        ref: function ref(select) {
-          _this4.frequencyRef = select;
-        },
         onChange: function onChange(e) {
-          _this4.handleCronSelection(e.target.value);
+          _this2.handleCronSelection(e.target.value);
         }
-      }, this.frequencyOptionsList.map(function (item) {
-        return _this4.getOption(item, 'frequency');
-      }))), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showDayPicker && this.renderDayPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showMonthPicker && this.renderMonthPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showWeekPicker && this.renderWeekPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showHourPicker && this.renderHourPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.selectedFrequency !== 'hour' && this.state.operationCronDict.selectedFrequency !== 'minute' && ':'), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showMinutePicker && this.renderMinutePicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.selectedFrequency === 'hour' && 'past the hour'));
+      }, /*#__PURE__*/_react["default"].createElement("option", {
+        value: "minute"
+      }, "Minute"), /*#__PURE__*/_react["default"].createElement("option", {
+        value: "hour"
+      }, "Hour"), /*#__PURE__*/_react["default"].createElement("option", {
+        value: "day"
+      }, "Day"), /*#__PURE__*/_react["default"].createElement("option", {
+        value: "week"
+      }, "Week"), /*#__PURE__*/_react["default"].createElement("option", {
+        value: "month"
+      }, "Month"), /*#__PURE__*/_react["default"].createElement("option", {
+        value: "year"
+      }, "Year"))), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showDayPicker && this.renderDayPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showMonthPicker && this.renderMonthPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showWeekPicker && this.renderWeekPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showHourPicker && this.renderHourPicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.selectedFrequency !== 'hour' && this.state.operationCronDict.selectedFrequency !== 'minute' && ':'), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.showMinutePicker && this.renderMinutePicker()), /*#__PURE__*/_react["default"].createElement("div", null, this.state.operationCronDict.selectedFrequency === 'hour' && 'past the hour'));
     }
   }]);
 
   return CronJob;
 }(_react.Component);
 
-CronJob.propTypes = {
-  // Use this callback function to receive the cron expression
-  // for the schedule configured.
-  getCronString: _propTypes["default"].func,
-  // Pass this prop to get the name of the job in the above callback
-  // function passed as props
-  jobName: _propTypes["default"].string,
-  // Use this to configure defaults or load CronJob UI for
-  //particular configuration
-  frequency: _propTypes["default"].string,
-  cronString: _propTypes["default"].string
-};
 var _default = CronJob;
 exports["default"] = _default;
+CronJob.propTypes = {
+  getCronExpression: _propTypes["default"].func,
+  jobName: _propTypes["default"].string
+};
