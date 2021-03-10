@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import "./style.scss";
+import "./style.css";
 
 const CronBuilder = require("cron-builder");
 
@@ -35,7 +35,7 @@ class CronJob extends Component {
 
   componentDidMount() {
     // Set default schedule frequency as 'minute'.
-    this.handleCronSelection("minute");
+    this.handleCronSelection("month");
     this.prepareCronExpression();
   }
 
@@ -185,7 +185,6 @@ class CronJob extends Component {
   renderHourPicker = () => {
     return (
       <div className="time-picker-container">
-        <div className="supporting-words"> at </div>
         <div className="form-control-wrapper">
           <select
             className="form-control"
@@ -209,7 +208,6 @@ class CronJob extends Component {
   renderDayPicker = () => {
     return (
       <div className="time-picker-container">
-        <div className="supporting-words"> on the </div>
         <div className="form-control-wrapper">
           <select
             className="form-control"
@@ -233,7 +231,6 @@ class CronJob extends Component {
   renderWeekPicker = () => {
     return (
       <div className="time-picker-container">
-        <div className="supporting-words"> on </div>
         <div className="form-control-wrapper">
           <select
             className="form-control"
@@ -480,13 +477,11 @@ class CronJob extends Component {
             onChange={(e) => {
               this.handleCronSelection(e.target.value);
             }}
+            value={this.state.operationCronDict.selectedFrequency}
           >
-            {/* <option value="minute">Minute</option> */}
-            {/* <option value="hour">Hour</option> */}
             <option value="day">毎日</option>
             <option value="week">毎週</option>
             <option value="month">毎月</option>
-            {/* <option value="year">Year</option> */}
           </select>
         </div>
 
@@ -496,6 +491,9 @@ class CronJob extends Component {
         <div>
           {this.state.operationCronDict.showMonthPicker &&
             this.renderMonthPicker()}
+        </div>
+        <div>
+          {this.state.operationCronDict.selectedFrequency === "month" && "日"}
         </div>
         <div>
           {this.state.operationCronDict.showWeekPicker &&
@@ -508,11 +506,16 @@ class CronJob extends Component {
         <div>
           {this.state.operationCronDict.selectedFrequency !== "hour" &&
             this.state.operationCronDict.selectedFrequency !== "minute" &&
-            ":"}
+            "時"}
         </div>
         <div>
           {this.state.operationCronDict.showMinutePicker &&
             this.renderMinutePicker()}
+        </div>
+        <div>
+          {this.state.operationCronDict.selectedFrequency !== "hour" &&
+            this.state.operationCronDict.selectedFrequency !== "minute" &&
+            "分"}
         </div>
         <div>
           {this.state.operationCronDict.selectedFrequency === "hour" &&
