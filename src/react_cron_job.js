@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import './style.scss';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import "./style.scss";
 
-const CronBuilder = require('cron-builder');
+const CronBuilder = require("cron-builder");
 
 // This component helps user to build cron expressions. We have built this component on top of
 // npm package: cron builder. We take the user inputs and then use the cron builder class and its
@@ -11,11 +11,9 @@ const CronBuilder = require('cron-builder');
 // getCronExpression: PropTypes.func // Call back function to be called on toggle
 
 class CronJob extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-
       // Display the date time pickers inputs
       // according to the  schedule frequency selected.
       operationCronDict: {
@@ -36,9 +34,8 @@ class CronJob extends Component {
   }
 
   componentDidMount() {
-
     // Set default schedule frequency as 'minute'.
-    this.handleCronSelection('minute');
+    this.handleCronSelection("minute");
     this.prepareCronExpression();
   }
 
@@ -156,7 +153,11 @@ class CronJob extends Component {
   // This function returns an option tag using the 'label' and 'value'
   // keys present in the object('item') passed as argument
   getOption = function (item, keyPrefix) {
-    return <option key={keyPrefix + item.label} value={item.value}>{item.label}</option>;
+    return (
+      <option key={keyPrefix + item.label} value={item.value}>
+        {item.label}
+      </option>
+    );
   };
 
   // Display the minute picker select box
@@ -167,16 +168,18 @@ class CronJob extends Component {
           className="form-control"
           id="minute"
           name="minute"
-          onChange={(e) => { this.updateScheduleConfiguration(e.target.options, 'minute'); }}
+          onChange={(e) => {
+            this.updateScheduleConfiguration(e.target.options, "minute");
+          }}
           multiple
         >
           {this.minuteOptionsList.map((item) => {
-            return this.getOption(item, 'minute');
+            return this.getOption(item, "minute");
           })}
         </select>
       </div>
     );
-  }
+  };
 
   // Display the hour picker select box
   renderHourPicker = () => {
@@ -188,17 +191,19 @@ class CronJob extends Component {
             className="form-control"
             id="hour"
             name="hour"
-            onChange={(e) => { this.updateScheduleConfiguration(e.target.options, 'hour'); }}
+            onChange={(e) => {
+              this.updateScheduleConfiguration(e.target.options, "hour");
+            }}
             multiple
           >
             {this.hourOptionsList.map((item) => {
-              return this.getOption(item, 'hour');
+              return this.getOption(item, "hour");
             })}
           </select>
         </div>
       </div>
     );
-  }
+  };
 
   // Display the day picker select box
   renderDayPicker = () => {
@@ -210,17 +215,19 @@ class CronJob extends Component {
             className="form-control"
             id="day"
             name="day"
-            onChange={(e) => { this.updateScheduleConfiguration(e.target.options, 'day'); }}
+            onChange={(e) => {
+              this.updateScheduleConfiguration(e.target.options, "day");
+            }}
             multiple
           >
             {this.dayOptionsList.map((item) => {
-              return this.getOption(item, 'day');
+              return this.getOption(item, "day");
             })}
           </select>
         </div>
       </div>
     );
-  }
+  };
 
   // Display the week picker select box
   renderWeekPicker = () => {
@@ -232,17 +239,19 @@ class CronJob extends Component {
             className="form-control"
             id="week"
             name="week"
-            onChange={(e) => { this.updateScheduleConfiguration(e.target.options, 'week'); }}
+            onChange={(e) => {
+              this.updateScheduleConfiguration(e.target.options, "week");
+            }}
             multiple
           >
             {this.weekOptionsList.map((item) => {
-              return this.getOption(item, 'week');
+              return this.getOption(item, "week");
             })}
           </select>
         </div>
       </div>
     );
-  }
+  };
 
   // Display the month picker select box
   renderMonthPicker = () => {
@@ -254,17 +263,19 @@ class CronJob extends Component {
             className="form-control"
             id="month"
             name="month"
-            onChange={(e) => { this.updateScheduleConfiguration(e.target.options, 'month'); }}
+            onChange={(e) => {
+              this.updateScheduleConfiguration(e.target.options, "month");
+            }}
             multiple
           >
             {this.monthOptionsList.map((item) => {
-              return this.getOption(item, 'month');
+              return this.getOption(item, "month");
             })}
           </select>
         </div>
       </div>
     );
-  }
+  };
 
   // This function takes care of displaying
   // appropriate date / time pickers as per the
@@ -275,7 +286,8 @@ class CronJob extends Component {
     displayHourFlag,
     displayDayFlag,
     displayWeekFlag,
-    displayMonthFlag) => {
+    displayMonthFlag
+  ) => {
     const operationCronDictCopy = {};
     operationCronDictCopy.showMinutePicker = displayMinuteFlag;
     operationCronDictCopy.showHourPicker = displayHourFlag;
@@ -285,56 +297,64 @@ class CronJob extends Component {
     operationCronDictCopy.selectedFrequency = selectedFrequency;
 
     this.setState({
-      operationCronDict: operationCronDictCopy
+      operationCronDict: operationCronDictCopy,
     });
-  }
+  };
 
   // This function generates the cron expression using the CronBuilder
   // class and its methods (cron builder npm pacakge).
   prepareCronExpression = () => {
     const cronExp = new CronBuilder();
-    this.state.minuteSeletedList.length && cronExp.set('minute', this.state.minuteSeletedList);
-    this.state.hourSelectedList.length && cronExp.set('hour', this.state.hourSelectedList);
-    this.state.daySelectedList.length && cronExp.set('dayOfTheMonth', this.state.daySelectedList);
-    this.state.weekSelectedList.length && cronExp.set('dayOfTheWeek', this.state.weekSelectedList);
-    this.state.monthSelectedList.length && cronExp.set('month', this.state.monthSelectedList);
+    this.state.minuteSeletedList.length &&
+      cronExp.set("minute", this.state.minuteSeletedList);
+    this.state.hourSelectedList.length &&
+      cronExp.set("hour", this.state.hourSelectedList);
+    this.state.daySelectedList.length &&
+      cronExp.set("dayOfTheMonth", this.state.daySelectedList);
+    this.state.weekSelectedList.length &&
+      cronExp.set("dayOfTheWeek", this.state.weekSelectedList);
+    this.state.monthSelectedList.length &&
+      cronExp.set("month", this.state.monthSelectedList);
     this.props.getCronExpression(cronExp.build(), this.props.jobName);
-  }
+  };
 
   // This function updates the selected values list in the state
   updateSelectedValues = (selectedValuesList, unitOfTime) => {
-
     switch (unitOfTime) {
-
-      case 'minute':
-        this.setState({ minuteSeletedList: selectedValuesList },
-          () => { this.prepareCronExpression(); });
+      case "minute":
+        this.setState({ minuteSeletedList: selectedValuesList }, () => {
+          this.prepareCronExpression();
+        });
         break;
 
-      case 'hour':
-        this.setState({ hourSelectedList: selectedValuesList },
-          () => { this.prepareCronExpression(); });
+      case "hour":
+        this.setState({ hourSelectedList: selectedValuesList }, () => {
+          this.prepareCronExpression();
+        });
         break;
 
-      case 'day':
-        this.setState({ daySelectedList: selectedValuesList },
-          () => { this.prepareCronExpression(); });
+      case "day":
+        this.setState({ daySelectedList: selectedValuesList }, () => {
+          this.prepareCronExpression();
+        });
         break;
 
-      case 'week':
-        this.setState({ weekSelectedList: selectedValuesList },
-          () => { this.prepareCronExpression(); });
+      case "week":
+        this.setState({ weekSelectedList: selectedValuesList }, () => {
+          this.prepareCronExpression();
+        });
         break;
 
-      case 'month':
-        this.setState({ monthSelectedList: selectedValuesList },
-          () => { this.prepareCronExpression(); });
+      case "month":
+        this.setState({ monthSelectedList: selectedValuesList }, () => {
+          this.prepareCronExpression();
+        });
         break;
 
       default:
         return null;
     }
-  }
+  };
 
   // This function is called when any changes are done on
   // any of the select boxes ofdate time picker UI. This function
@@ -345,64 +365,109 @@ class CronJob extends Component {
     let selectedValuesList = [];
 
     // get the latest selected values from all the options in select.
-    selectedValuesList = [...options].filter(o => o.selected).map(o => o.value);
+    selectedValuesList = [...options]
+      .filter((o) => o.selected)
+      .map((o) => o.value);
 
     // update the selectedvalues list in the state
     this.updateSelectedValues(selectedValuesList, unitOfTime);
-  }
+  };
 
   // This function decides which date / time picker should be displayed
   // based on schedule frequency selected.
   updateCronSelection = (selectedFrequency) => {
     switch (selectedFrequency) {
-
-      case 'minute':
-        this.displayDateTimePicker(selectedFrequency, false, false, false, false, false);
+      case "minute":
+        this.displayDateTimePicker(
+          selectedFrequency,
+          false,
+          false,
+          false,
+          false,
+          false
+        );
         break;
 
-      case 'hour':
-        this.displayDateTimePicker(selectedFrequency, true, false, false, false, false);
+      case "hour":
+        this.displayDateTimePicker(
+          selectedFrequency,
+          true,
+          false,
+          false,
+          false,
+          false
+        );
         break;
 
-      case 'day':
-        this.displayDateTimePicker(selectedFrequency, true, true, false, false, false);
+      case "day":
+        this.displayDateTimePicker(
+          selectedFrequency,
+          true,
+          true,
+          false,
+          false,
+          false
+        );
         break;
 
-      case 'week':
-        this.displayDateTimePicker(selectedFrequency, true, true, false, true, false);
+      case "week":
+        this.displayDateTimePicker(
+          selectedFrequency,
+          true,
+          true,
+          false,
+          true,
+          false
+        );
         break;
 
-      case 'month':
-        this.displayDateTimePicker(selectedFrequency, true, true, true, false, false);
+      case "month":
+        this.displayDateTimePicker(
+          selectedFrequency,
+          true,
+          true,
+          true,
+          false,
+          false
+        );
         break;
 
-      case 'year':
-        this.displayDateTimePicker(selectedFrequency, true, true, true, false, true);
+      case "year":
+        this.displayDateTimePicker(
+          selectedFrequency,
+          true,
+          true,
+          true,
+          false,
+          true
+        );
         break;
 
       default:
         return null;
     }
-  }
+  };
 
   // This is called when scheduled frequency is updated.
   // Here we reset selected values and re render the date
   // time pickers as per schedule selected.
   handleCronSelection = (selectedFrequency) => {
-
     // reset selected values when the scheduled
     // frequency is updated.
-    this.setState({
-      minuteSeletedList: [],
-      hourSelectedList: [],
-      daySelectedList: [],
-      weekSelectedList: [],
-      monthSelectedList: [],
-      operationCronDict: {}
-    }, () => {
-      this.updateCronSelection(selectedFrequency);
-    });
-  }
+    this.setState(
+      {
+        minuteSeletedList: [],
+        hourSelectedList: [],
+        daySelectedList: [],
+        weekSelectedList: [],
+        monthSelectedList: [],
+        operationCronDict: {},
+      },
+      () => {
+        this.updateCronSelection(selectedFrequency);
+      }
+    );
+  };
 
   render() {
     return (
@@ -412,7 +477,9 @@ class CronJob extends Component {
           <select
             className="form-control cron-select"
             name="cronSelect"
-            onChange={(e) => { this.handleCronSelection(e.target.value); }}
+            onChange={(e) => {
+              this.handleCronSelection(e.target.value);
+            }}
           >
             {/* <option value="minute">Minute</option> */}
             {/* <option value="hour">Hour</option> */}
@@ -423,19 +490,33 @@ class CronJob extends Component {
           </select>
         </div>
 
-        <div>{this.state.operationCronDict.showDayPicker && this.renderDayPicker()}</div>
-        <div>{this.state.operationCronDict.showMonthPicker && this.renderMonthPicker()}</div>
-        <div>{this.state.operationCronDict.showWeekPicker && this.renderWeekPicker()}</div>
         <div>
-          {this.state.operationCronDict.showHourPicker && this.renderHourPicker()}
+          {this.state.operationCronDict.showDayPicker && this.renderDayPicker()}
         </div>
         <div>
-          {(this.state.operationCronDict.selectedFrequency !== 'hour' &&
-            this.state.operationCronDict.selectedFrequency !== 'minute') && ':'}
+          {this.state.operationCronDict.showMonthPicker &&
+            this.renderMonthPicker()}
         </div>
-        <div>{this.state.operationCronDict.showMinutePicker && this.renderMinutePicker()}</div>
         <div>
-          {this.state.operationCronDict.selectedFrequency === 'hour' && 'past the hour'}
+          {this.state.operationCronDict.showWeekPicker &&
+            this.renderWeekPicker()}
+        </div>
+        <div>
+          {this.state.operationCronDict.showHourPicker &&
+            this.renderHourPicker()}
+        </div>
+        <div>
+          {this.state.operationCronDict.selectedFrequency !== "hour" &&
+            this.state.operationCronDict.selectedFrequency !== "minute" &&
+            ":"}
+        </div>
+        <div>
+          {this.state.operationCronDict.showMinutePicker &&
+            this.renderMinutePicker()}
+        </div>
+        <div>
+          {this.state.operationCronDict.selectedFrequency === "hour" &&
+            "past the hour"}
         </div>
       </div>
     );
@@ -446,5 +527,5 @@ export default CronJob;
 
 CronJob.propTypes = {
   getCronExpression: PropTypes.func,
-  jobName: PropTypes.string
+  jobName: PropTypes.string,
 };
