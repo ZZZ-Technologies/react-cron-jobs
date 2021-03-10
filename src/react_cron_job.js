@@ -414,12 +414,12 @@ class CronJob extends Component {
             name="cronSelect"
             onChange={(e) => { this.handleCronSelection(e.target.value); }}
           >
-            <option value="minute">Minute</option>
-            <option value="hour">Hour</option>
-            <option value="day">Day</option>
-            <option value="week">Week</option>
-            <option value="month">Month</option>
-            <option value="year">Year</option>
+            {/* <option value="minute">Minute</option> */}
+            {/* <option value="hour">Hour</option> */}
+            <option value="day">毎日</option>
+            <option value="week">毎週</option>
+            <option value="month">毎月</option>
+            {/* <option value="year">Year</option> */}
           </select>
         </div>
 
