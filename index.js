@@ -75,270 +75,270 @@ var CronJob = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "minuteOptionsList", [{
-      label: '0',
+      label: "0",
       value: 0
     }, {
-      label: '5',
+      label: "5",
       value: 5
     }, {
-      label: '10',
+      label: "10",
       value: 10
     }, {
-      label: '15',
+      label: "15",
       value: 15
     }, {
-      label: '20',
+      label: "20",
       value: 20
     }, {
-      label: '25',
+      label: "25",
       value: 25
     }, {
-      label: '30',
+      label: "30",
       value: 30
     }, {
-      label: '35',
+      label: "35",
       value: 35
     }, {
-      label: '40',
+      label: "40",
       value: 40
     }, {
-      label: '45',
+      label: "45",
       value: 45
     }, {
-      label: '50',
+      label: "50",
       value: 50
     }, {
-      label: '55',
+      label: "55",
       value: 55
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "hourOptionsList", [{
-      label: '0',
+      label: "0",
       value: 0
     }, {
-      label: '1',
+      label: "1",
       value: 1
     }, {
-      label: '2',
+      label: "2",
       value: 2
     }, {
-      label: '3',
+      label: "3",
       value: 3
     }, {
-      label: '4',
+      label: "4",
       value: 4
     }, {
-      label: '5',
+      label: "5",
       value: 5
     }, {
-      label: '6',
+      label: "6",
       value: 6
     }, {
-      label: '7',
+      label: "7",
       value: 7
     }, {
-      label: '8',
+      label: "8",
       value: 8
     }, {
-      label: '9',
+      label: "9",
       value: 9
     }, {
-      label: '10',
+      label: "10",
       value: 10
     }, {
-      label: '11',
+      label: "11",
       value: 11
     }, {
-      label: '12',
+      label: "12",
       value: 12
     }, {
-      label: '13',
+      label: "13",
       value: 13
     }, {
-      label: '14',
+      label: "14",
       value: 14
     }, {
-      label: '15',
+      label: "15",
       value: 15
     }, {
-      label: '16',
+      label: "16",
       value: 16
     }, {
-      label: '17',
+      label: "17",
       value: 17
     }, {
-      label: '18',
+      label: "18",
       value: 18
     }, {
-      label: '19',
+      label: "19",
       value: 19
     }, {
-      label: '20',
+      label: "20",
       value: 20
     }, {
-      label: '21',
+      label: "21",
       value: 21
     }, {
-      label: '22',
+      label: "22",
       value: 22
     }, {
-      label: '23',
+      label: "23",
       value: 23
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "dayOptionsList", [{
-      label: '1st',
+      label: "1",
       value: 1
     }, {
-      label: '2nd',
+      label: "2",
       value: 2
     }, {
-      label: '3rd',
+      label: "3",
       value: 3
     }, {
-      label: '4th',
+      label: "4",
       value: 4
     }, {
-      label: '5th',
+      label: "5",
       value: 5
     }, {
-      label: '6th',
+      label: "6",
       value: 6
     }, {
-      label: '7th',
+      label: "7",
       value: 7
     }, {
-      label: '8th',
+      label: "8",
       value: 8
     }, {
-      label: '9th',
+      label: "9",
       value: 9
     }, {
-      label: '10th',
+      label: "10",
       value: 10
     }, {
-      label: '11th',
+      label: "11",
       value: 11
     }, {
-      label: '12th',
+      label: "12",
       value: 12
     }, {
-      label: '13th',
+      label: "13",
       value: 13
     }, {
-      label: '14th',
+      label: "14",
       value: 14
     }, {
-      label: '15th',
+      label: "15",
       value: 15
     }, {
-      label: '16th',
+      label: "16",
       value: 16
     }, {
-      label: '17th',
+      label: "17",
       value: 17
     }, {
-      label: '18th',
+      label: "18",
       value: 18
     }, {
-      label: '19th',
+      label: "19",
       value: 19
     }, {
-      label: '20th',
+      label: "20",
       value: 20
     }, {
-      label: '21st',
+      label: "21",
       value: 21
     }, {
-      label: '22nd',
+      label: "22",
       value: 22
     }, {
-      label: '23rd',
+      label: "23",
       value: 23
     }, {
-      label: '24th',
+      label: "24",
       value: 24
     }, {
-      label: '25th',
+      label: "25",
       value: 25
     }, {
-      label: '26th',
+      label: "26",
       value: 26
     }, {
-      label: '27th',
+      label: "27",
       value: 27
     }, {
-      label: '28th',
+      label: "28",
       value: 28
     }, {
-      label: '29th',
+      label: "29",
       value: 29
     }, {
-      label: '30th',
+      label: "30",
       value: 30
     }, {
-      label: '31th',
+      label: "31",
       value: 31
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "weekOptionsList", [{
-      label: 'Sunday',
+      label: "日曜",
       value: 1
     }, {
-      label: 'Monday',
+      label: "月曜",
       value: 2
     }, {
-      label: 'Tuesday',
+      label: "火曜",
       value: 3
     }, {
-      label: 'Wednesday',
+      label: "水曜",
       value: 4
     }, {
-      label: 'Thursday',
+      label: "木曜",
       value: 5
     }, {
-      label: 'Friday',
+      label: "金曜",
       value: 6
     }, {
-      label: 'Saturday',
+      label: "土曜",
       value: 7
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "monthOptionsList", [{
-      label: 'January',
+      label: "January",
       value: 1
     }, {
-      label: 'Febrauary',
+      label: "Febrauary",
       value: 2
     }, {
-      label: 'March',
+      label: "March",
       value: 3
     }, {
-      label: 'April',
+      label: "April",
       value: 4
     }, {
-      label: 'May',
+      label: "May",
       value: 5
     }, {
-      label: 'June',
+      label: "June",
       value: 6
     }, {
-      label: 'July',
+      label: "July",
       value: 7
     }, {
-      label: 'August',
+      label: "August",
       value: 8
     }, {
-      label: 'September',
+      label: "September",
       value: 9
     }, {
-      label: 'October',
+      label: "October",
       value: 10
     }, {
-      label: 'November',
+      label: "November",
       value: 11
     }, {
-      label: 'December',
+      label: "December",
       value: 12
     }]);
 
