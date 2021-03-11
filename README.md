@@ -24,9 +24,7 @@ class App extends React.Component {
   render () {
     return(
       <div>
-        <CronJob
-          getCronExpression={this.myCallBackFunc}
-          jobName={'applicationBackup'}>
+        <CronJob onChange={this.myCallBackFunc}>
         </CronJob>
       </div>
     );
@@ -40,8 +38,7 @@ export default App;
 
 | Prop              | Type       | Description |
 |-------------------|------------|-------------|
-| `getCronExpression`         | _function_  | Use this callback function to receive the cron expression for the schedule configured.  |
-| `jobName`  | _string_  | Pass this prop to get the name of the job in the callback function passed as props |
+| `onChange`         | _function_  | Use this callback function to receive the cron expression for the schedule configured.  |
 ---
 
 ## License

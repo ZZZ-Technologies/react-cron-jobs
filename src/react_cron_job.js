@@ -8,7 +8,7 @@ const CronBuilder = require("cron-builder");
 // npm package: cron builder. We take the user inputs and then use the cron builder class and its
 // methods to generate the cron expression.
 // props:
-// getCronExpression: PropTypes.func // Call back function to be called on toggle
+// onChange: PropTypes.func // Call back function to be called on toggle
 
 class CronJob extends Component {
   constructor(props) {
@@ -35,8 +35,8 @@ class CronJob extends Component {
 
   componentDidMount() {
     // Set default schedule frequency as 'minute'.
-    this.handleCronSelection("month");
-    this.prepareCronExpression();
+    // this.handleCronSelection();
+    this.setInitialValue("month");
   }
 
   // This is an options list used by
@@ -171,6 +171,7 @@ class CronJob extends Component {
           onChange={(e) => {
             this.updateScheduleConfiguration(e.target.options, "minute");
           }}
+          value={this.state.minuteSeletedList}
           multiple
         >
           {this.minuteOptionsList.map((item) => {
@@ -193,6 +194,7 @@ class CronJob extends Component {
             onChange={(e) => {
               this.updateScheduleConfiguration(e.target.options, "hour");
             }}
+            value={this.state.hourSelectedList}
             multiple
           >
             {this.hourOptionsList.map((item) => {
@@ -216,6 +218,7 @@ class CronJob extends Component {
             onChange={(e) => {
               this.updateScheduleConfiguration(e.target.options, "day");
             }}
+            value={this.state.daySelectedList}
             multiple
           >
             {this.dayOptionsList.map((item) => {
@@ -239,6 +242,7 @@ class CronJob extends Component {
             onChange={(e) => {
               this.updateScheduleConfiguration(e.target.options, "week");
             }}
+            value={this.state.weekSelectedList}
             multiple
           >
             {this.weekOptionsList.map((item) => {
@@ -263,6 +267,7 @@ class CronJob extends Component {
             onChange={(e) => {
               this.updateScheduleConfiguration(e.target.options, "month");
             }}
+            value={this.state.monthSelectedList}
             multiple
           >
             {this.monthOptionsList.map((item) => {
@@ -312,7 +317,7 @@ class CronJob extends Component {
       cronExp.set("dayOfTheWeek", this.state.weekSelectedList);
     this.state.monthSelectedList.length &&
       cronExp.set("month", this.state.monthSelectedList);
-    this.props.getCronExpression(cronExp.build(), this.props.jobName);
+    this.props.onChange(cronExp.build());
   };
 
   // This function updates the selected values list in the state
@@ -451,6 +456,7 @@ class CronJob extends Component {
   handleCronSelection = (selectedFrequency) => {
     // reset selected values when the scheduled
     // frequency is updated.
+    this.props.onChange("* * * * *");
     this.setState(
       {
         minuteSeletedList: [],
@@ -466,10 +472,25 @@ class CronJob extends Component {
     );
   };
 
+  setInitialValue = (selectedFrequency) => {
+    const valueArray = this.props.value.split(" ");
+    this.setState(
+      {
+        minuteSeletedList: valueArray[0].split(","),
+        hourSelectedList: valueArray[1].split(","),
+        daySelectedList: [valueArray[2]],
+        monthSelectedList: [valueArray[3]],
+        weekSelectedList: [valueArray[4]],
+      },
+      () => {
+        this.updateCronSelection(selectedFrequency);
+      }
+    );
+  };
+
   render() {
     return (
       <div className="cron-tab-container">
-        <div className="supporting-words"> Every </div>
         <div className="form-control-wrapper">
           <select
             className="form-control cron-select"
@@ -529,6 +550,6 @@ class CronJob extends Component {
 export default CronJob;
 
 CronJob.propTypes = {
-  getCronExpression: PropTypes.func,
-  jobName: PropTypes.string,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
 };
