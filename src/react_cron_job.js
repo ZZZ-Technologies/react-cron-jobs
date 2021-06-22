@@ -124,13 +124,13 @@ class CronJob extends Component {
   // This is an options list used by
   // week picker select box.
   weekOptionsList = [
-    { label: "日曜", value: 1 },
-    { label: "月曜", value: 2 },
-    { label: "火曜", value: 3 },
-    { label: "水曜", value: 4 },
-    { label: "木曜", value: 5 },
-    { label: "金曜", value: 6 },
-    { label: "土曜", value: 7 },
+    { label: "日曜", value: 0 },
+    { label: "月曜", value: 1 },
+    { label: "火曜", value: 2 },
+    { label: "水曜", value: 3 },
+    { label: "木曜", value: 4 },
+    { label: "金曜", value: 5 },
+    { label: "土曜", value: 6 },
   ];
 
   // This is an options list used by
