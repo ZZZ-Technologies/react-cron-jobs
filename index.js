@@ -281,25 +281,25 @@ var CronJob = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "weekOptionsList", [{
       label: "日曜",
-      value: 1
+      value: 0
     }, {
       label: "月曜",
-      value: 2
+      value: 1
     }, {
       label: "火曜",
-      value: 3
+      value: 2
     }, {
       label: "水曜",
-      value: 4
+      value: 3
     }, {
       label: "木曜",
-      value: 5
+      value: 4
     }, {
       label: "金曜",
-      value: 6
+      value: 5
     }, {
       label: "土曜",
-      value: 7
+      value: 6
     }]);
 
     _defineProperty(_assertThisInitialized(_this), "monthOptionsList", [{
