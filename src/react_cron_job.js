@@ -36,7 +36,24 @@ class CronJob extends Component {
   componentDidMount() {
     // Set default schedule frequency as 'minute'.
     // this.handleCronSelection();
-    this.setInitialValue("month");
+
+    let selectedFrequency = "week";
+
+    switch (true) {
+      // 毎月
+      case /\d{1,2} \d{1,2} \d{1,2} \* \*/.test(this.props.value):
+        selectedFrequency = "month";
+        break;
+      // 毎日
+      case /\d{1,2} \d{1,2} \* \* \*/.test(this.props.value):
+        selectedFrequency = "day";
+        break;
+      // 毎週 or no select
+      default:
+        selectedFrequency = "week";
+    }
+
+    this.setInitialValue(selectedFrequency);
   }
 
   // This is an options list used by
