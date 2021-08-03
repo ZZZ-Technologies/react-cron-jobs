@@ -2,36 +2,41 @@ $black: #666;
 $border_color: #efefef;
 
 .cron-tab-container {
-  padding: 20px;
-  display: flex;
+	padding: 20px;
+	display: flex;
 
-  .time-picker-container {
-    display: flex;
-  }
+	.time-picker-container {
+		display: flex;
+	}
 
-  .form-control-wrapper {
-    margin: 0 8px;
+	.form-control-wrapper {
+		margin: 0 8px;
 
-    .form-control {
-      display: block;
-      padding: 3px 5px;
-      font-size: 16px;
-      height: 140px;
-      width: 140px;
-      line-height: 1.5;
-      color: $black;
-      border: 1 solid $border_color;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
+		.form-control {
+			display: block;
+			padding: 3px 5px;
+			font-size: 16px;
+			height: 140px;
+			width: 140px;
+			line-height: 1.5;
+			color: $black;
+			border: 1 solid $border_color;
+			transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		}
 
-    .cron-select {
-      height: 30px;
-      width: 140px;
-    }
-  }
+		.cron-select {
+			height: 30px;
+			width: 140px;
+		}
+	}
 
-  .supporting-words {
-    margin: 0 8px;
-    font-size: 16px;
-  }
+	.supporting-words {
+		margin: 0 8px;
+		font-size: 16px;
+	}
+}
+
+.cron-text-container {
+	display: flex;
+	align-items: baseline;
 }

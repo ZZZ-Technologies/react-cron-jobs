@@ -21,3 +21,7 @@
   .cron-tab-container .supporting-words {
     margin: 0 8px;
     font-size: 16px; }
+
+.cron-text-container {
+  display: flex;
+  align-items: baseline; }
