@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
 import "./style.css";
 
 const CronBuilder = require("cron-builder");
@@ -179,121 +179,141 @@ class CronJob extends Component {
 
   // Display the minute picker select box
   renderMinutePicker = () => {
-    return (
-      <div className="time-picker-container form-control-wrapper">
-        <select
-          className="form-control"
-          id="minute"
-          name="minute"
-          onChange={(e) => {
-            this.updateScheduleConfiguration(e.target.options, "minute");
-          }}
-          value={this.state.minuteSeletedList}
-          multiple
-        >
-          {this.minuteOptionsList.map((item) => {
-            return this.getOption(item, "minute");
-          })}
-        </select>
-      </div>
-    );
+    if (this.props.disabled) {
+      return <span>{this.props.value.split(" ")[0]}</span>;
+    } else {
+      return (
+        <div className="time-picker-container form-control-wrapper">
+          <select
+            className="form-control"
+            id="minute"
+            name="minute"
+            onChange={(e) => {
+              this.updateScheduleConfiguration(e.target.options, "minute");
+            }}
+            value={this.state.minuteSeletedList}
+            multiple
+          >
+            {this.minuteOptionsList.map((item) => {
+              return this.getOption(item, "minute");
+            })}
+          </select>
+        </div>
+      );
+    }
   };
 
   // Display the hour picker select box
   renderHourPicker = () => {
-    return (
-      <div className="time-picker-container">
-        <div className="form-control-wrapper">
-          <select
-            className="form-control"
-            id="hour"
-            name="hour"
-            onChange={(e) => {
-              this.updateScheduleConfiguration(e.target.options, "hour");
-            }}
-            value={this.state.hourSelectedList}
-            multiple
-          >
-            {this.hourOptionsList.map((item) => {
-              return this.getOption(item, "hour");
-            })}
-          </select>
+    if (this.props.disabled) {
+      return <span>{this.props.value.split(" ")[1]}</span>;
+    } else {
+      return (
+        <div className="time-picker-container">
+          <div className="form-control-wrapper">
+            <select
+              className="form-control"
+              id="hour"
+              name="hour"
+              onChange={(e) => {
+                this.updateScheduleConfiguration(e.target.options, "hour");
+              }}
+              value={this.state.hourSelectedList}
+              multiple
+            >
+              {this.hourOptionsList.map((item) => {
+                return this.getOption(item, "hour");
+              })}
+            </select>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   };
 
   // Display the day picker select box
   renderDayPicker = () => {
-    return (
-      <div className="time-picker-container">
-        <div className="form-control-wrapper">
-          <select
-            className="form-control"
-            id="day"
-            name="day"
-            onChange={(e) => {
-              this.updateScheduleConfiguration(e.target.options, "day");
-            }}
-            value={this.state.daySelectedList}
-            multiple
-          >
-            {this.dayOptionsList.map((item) => {
-              return this.getOption(item, "day");
-            })}
-          </select>
+    if (this.props.disabled) {
+      return <span>{this.props.value.split(" ")[2]}</span>;
+    } else {
+      return (
+        <div className="time-picker-container">
+          <div className="form-control-wrapper">
+            <select
+              className="form-control"
+              id="day"
+              name="day"
+              onChange={(e) => {
+                this.updateScheduleConfiguration(e.target.options, "day");
+              }}
+              value={this.state.daySelectedList}
+              multiple
+            >
+              {this.dayOptionsList.map((item) => {
+                return this.getOption(item, "day");
+              })}
+            </select>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   };
 
   // Display the week picker select box
   renderWeekPicker = () => {
-    return (
-      <div className="time-picker-container">
-        <div className="form-control-wrapper">
-          <select
-            className="form-control"
-            id="week"
-            name="week"
-            onChange={(e) => {
-              this.updateScheduleConfiguration(e.target.options, "week");
-            }}
-            value={this.state.weekSelectedList}
-            multiple
-          >
-            {this.weekOptionsList.map((item) => {
-              return this.getOption(item, "week");
-            })}
-          </select>
+    if (this.props.disabled) {
+      return <span>{this.props.value.split(" ")[4]}</span>;
+    } else {
+      return (
+        <div className="time-picker-container">
+          <div className="form-control-wrapper">
+            <select
+              className="form-control"
+              id="week"
+              name="week"
+              onChange={(e) => {
+                this.updateScheduleConfiguration(e.target.options, "week");
+              }}
+              value={this.state.weekSelectedList}
+              multiple
+            >
+              {this.weekOptionsList.map((item) => {
+                return this.getOption(item, "week");
+              })}
+            </select>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   };
 
   // Display the month picker select box
   renderMonthPicker = () => {
-    return (
-      <div className="time-picker-container">
-        <div className="supporting-words"> of </div>
-        <div className="form-control-wrapper">
-          <select
-            className="form-control"
-            id="month"
-            name="month"
-            onChange={(e) => {
-              this.updateScheduleConfiguration(e.target.options, "month");
-            }}
-            value={this.state.monthSelectedList}
-            multiple
-          >
-            {this.monthOptionsList.map((item) => {
-              return this.getOption(item, "month");
-            })}
-          </select>
+    if (this.props.disabled) {
+      return <span>{this.props.value.split(" ")[3]}</span>;
+    } else {
+      return (
+        <div className="time-picker-container">
+          <div className="supporting-words"> of </div>
+          <div className="form-control-wrapper">
+            <select
+              className="form-control"
+              id="month"
+              name="month"
+              onChange={(e) => {
+                this.updateScheduleConfiguration(e.target.options, "month");
+              }}
+              value={this.state.monthSelectedList}
+              multiple
+            >
+              {this.monthOptionsList.map((item) => {
+                return this.getOption(item, "month");
+              })}
+            </select>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   };
 
   // This function takes care of displaying
@@ -505,24 +525,48 @@ class CronJob extends Component {
     );
   };
 
+  selectedFrequencyJa = (selectedFrequency) => {
+    switch (selectedFrequency) {
+      case "day":
+        return "毎日";
+      case "week":
+        return "毎週";
+      case "month":
+        return "毎月";
+      default:
+        return null;
+    }
+  };
+
   render() {
     return (
-      <div className="cron-tab-container">
-        <div className="form-control-wrapper">
-          <select
-            className="form-control cron-select"
-            name="cronSelect"
-            onChange={(e) => {
-              this.handleCronSelection(e.target.value);
-            }}
-            value={this.state.operationCronDict.selectedFrequency}
-          >
-            <option value="day">毎日</option>
-            <option value="week">毎週</option>
-            <option value="month">毎月</option>
-          </select>
-        </div>
-
+      <div
+        className={
+          this.props.disabled ? "cron-text-container" : "cron-tab-container"
+        }
+      >
+        {this.props.disabled ? (
+          <span>
+            {this.selectedFrequencyJa(
+              this.state.operationCronDict.selectedFrequency
+            )}
+          </span>
+        ) : (
+          <div className="form-control-wrapper">
+            <select
+              className="form-control cron-select"
+              name="cronSelect"
+              onChange={(e) => {
+                this.handleCronSelection(e.target.value);
+              }}
+              value={this.state.operationCronDict.selectedFrequency}
+            >
+              <option value="day">毎日</option>
+              <option value="week">毎週</option>
+              <option value="month">毎月</option>
+            </select>
+          </div>
+        )}
         <div>
           {this.state.operationCronDict.showDayPicker && this.renderDayPicker()}
         </div>
@@ -569,4 +613,5 @@ export default CronJob;
 CronJob.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
+  disabled: PropTypes.bool,
 };

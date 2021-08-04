@@ -5,17 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-require("./style.css");
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+require("./style.css");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -348,98 +348,118 @@ var CronJob = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderMinutePicker", function () {
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "time-picker-container form-control-wrapper"
-      }, /*#__PURE__*/_react["default"].createElement("select", {
-        className: "form-control",
-        id: "minute",
-        name: "minute",
-        onChange: function onChange(e) {
-          _this.updateScheduleConfiguration(e.target.options, "minute");
-        },
-        value: _this.state.minuteSeletedList,
-        multiple: true
-      }, _this.minuteOptionsList.map(function (item) {
-        return _this.getOption(item, "minute");
-      })));
+      if (_this.props.disabled) {
+        return /*#__PURE__*/_react["default"].createElement("span", null, _this.props.value.split(" ")[0]);
+      } else {
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          className: "time-picker-container form-control-wrapper"
+        }, /*#__PURE__*/_react["default"].createElement("select", {
+          className: "form-control",
+          id: "minute",
+          name: "minute",
+          onChange: function onChange(e) {
+            _this.updateScheduleConfiguration(e.target.options, "minute");
+          },
+          value: _this.state.minuteSeletedList,
+          multiple: true
+        }, _this.minuteOptionsList.map(function (item) {
+          return _this.getOption(item, "minute");
+        })));
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderHourPicker", function () {
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "time-picker-container"
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        className: "form-control-wrapper"
-      }, /*#__PURE__*/_react["default"].createElement("select", {
-        className: "form-control",
-        id: "hour",
-        name: "hour",
-        onChange: function onChange(e) {
-          _this.updateScheduleConfiguration(e.target.options, "hour");
-        },
-        value: _this.state.hourSelectedList,
-        multiple: true
-      }, _this.hourOptionsList.map(function (item) {
-        return _this.getOption(item, "hour");
-      }))));
+      if (_this.props.disabled) {
+        return /*#__PURE__*/_react["default"].createElement("span", null, _this.props.value.split(" ")[1]);
+      } else {
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          className: "time-picker-container"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "form-control-wrapper"
+        }, /*#__PURE__*/_react["default"].createElement("select", {
+          className: "form-control",
+          id: "hour",
+          name: "hour",
+          onChange: function onChange(e) {
+            _this.updateScheduleConfiguration(e.target.options, "hour");
+          },
+          value: _this.state.hourSelectedList,
+          multiple: true
+        }, _this.hourOptionsList.map(function (item) {
+          return _this.getOption(item, "hour");
+        }))));
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderDayPicker", function () {
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "time-picker-container"
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        className: "form-control-wrapper"
-      }, /*#__PURE__*/_react["default"].createElement("select", {
-        className: "form-control",
-        id: "day",
-        name: "day",
-        onChange: function onChange(e) {
-          _this.updateScheduleConfiguration(e.target.options, "day");
-        },
-        value: _this.state.daySelectedList,
-        multiple: true
-      }, _this.dayOptionsList.map(function (item) {
-        return _this.getOption(item, "day");
-      }))));
+      if (_this.props.disabled) {
+        return /*#__PURE__*/_react["default"].createElement("span", null, _this.props.value.split(" ")[2]);
+      } else {
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          className: "time-picker-container"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "form-control-wrapper"
+        }, /*#__PURE__*/_react["default"].createElement("select", {
+          className: "form-control",
+          id: "day",
+          name: "day",
+          onChange: function onChange(e) {
+            _this.updateScheduleConfiguration(e.target.options, "day");
+          },
+          value: _this.state.daySelectedList,
+          multiple: true
+        }, _this.dayOptionsList.map(function (item) {
+          return _this.getOption(item, "day");
+        }))));
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderWeekPicker", function () {
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "time-picker-container"
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        className: "form-control-wrapper"
-      }, /*#__PURE__*/_react["default"].createElement("select", {
-        className: "form-control",
-        id: "week",
-        name: "week",
-        onChange: function onChange(e) {
-          _this.updateScheduleConfiguration(e.target.options, "week");
-        },
-        value: _this.state.weekSelectedList,
-        multiple: true
-      }, _this.weekOptionsList.map(function (item) {
-        return _this.getOption(item, "week");
-      }))));
+      if (_this.props.disabled) {
+        return /*#__PURE__*/_react["default"].createElement("span", null, _this.props.value.split(" ")[4]);
+      } else {
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          className: "time-picker-container"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "form-control-wrapper"
+        }, /*#__PURE__*/_react["default"].createElement("select", {
+          className: "form-control",
+          id: "week",
+          name: "week",
+          onChange: function onChange(e) {
+            _this.updateScheduleConfiguration(e.target.options, "week");
+          },
+          value: _this.state.weekSelectedList,
+          multiple: true
+        }, _this.weekOptionsList.map(function (item) {
+          return _this.getOption(item, "week");
+        }))));
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderMonthPicker", function () {
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "time-picker-container"
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        className: "supporting-words"
-      }, " of "), /*#__PURE__*/_react["default"].createElement("div", {
-        className: "form-control-wrapper"
-      }, /*#__PURE__*/_react["default"].createElement("select", {
-        className: "form-control",
-        id: "month",
-        name: "month",
-        onChange: function onChange(e) {
-          _this.updateScheduleConfiguration(e.target.options, "month");
-        },
-        value: _this.state.monthSelectedList,
-        multiple: true
-      }, _this.monthOptionsList.map(function (item) {
-        return _this.getOption(item, "month");
-      }))));
+      if (_this.props.disabled) {
+        return /*#__PURE__*/_react["default"].createElement("span", null, _this.props.value.split(" ")[3]);
+      } else {
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          className: "time-picker-container"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "supporting-words"
+        }, " of "), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "form-control-wrapper"
+        }, /*#__PURE__*/_react["default"].createElement("select", {
+          className: "form-control",
+          id: "month",
+          name: "month",
+          onChange: function onChange(e) {
+            _this.updateScheduleConfiguration(e.target.options, "month");
+          },
+          value: _this.state.monthSelectedList,
+          multiple: true
+        }, _this.monthOptionsList.map(function (item) {
+          return _this.getOption(item, "month");
+        }))));
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "displayDateTimePicker", function (selectedFrequency, displayMinuteFlag, displayHourFlag, displayDayFlag, displayWeekFlag, displayMonthFlag) {
@@ -599,6 +619,22 @@ var CronJob = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "selectedFrequencyJa", function (selectedFrequency) {
+      switch (selectedFrequency) {
+        case "day":
+          return "毎日";
+
+        case "week":
+          return "毎週";
+
+        case "month":
+          return "毎月";
+
+        default:
+          return null;
+      }
+    });
+
     _this.state = {
       // Display the date time pickers inputs
       // according to the  schedule frequency selected.
@@ -652,8 +688,8 @@ var CronJob = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "cron-tab-container"
-      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: this.props.disabled ? "cron-text-container" : "cron-tab-container"
+      }, this.props.disabled ? /*#__PURE__*/_react["default"].createElement("span", null, this.selectedFrequencyJa(this.state.operationCronDict.selectedFrequency)) : /*#__PURE__*/_react["default"].createElement("div", {
         className: "form-control-wrapper"
       }, /*#__PURE__*/_react["default"].createElement("select", {
         className: "form-control cron-select",
@@ -679,5 +715,6 @@ var _default = CronJob;
 exports["default"] = _default;
 CronJob.propTypes = {
   onChange: _propTypes["default"].func,
-  value: _propTypes["default"].string
+  value: _propTypes["default"].string,
+  disabled: _propTypes["default"].bool
 };
