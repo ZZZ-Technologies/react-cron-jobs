@@ -262,7 +262,10 @@ class CronJob extends Component {
   // Display the week picker select box
   renderWeekPicker = () => {
     if (this.props.disabled) {
-      return <span>{this.props.value.split(" ")[4]}</span>;
+      const dayOfWeek = this.weekOptionsList.find(
+        (e) => e.value === Number(this.props.value.split(" ")[4])
+      );
+      return <span>{dayOfWeek.label}</span>;
     } else {
       return (
         <div className="time-picker-container">
