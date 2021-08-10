@@ -416,7 +416,11 @@ var CronJob = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "renderWeekPicker", function () {
       if (_this.props.disabled) {
-        return /*#__PURE__*/_react["default"].createElement("span", null, _this.props.value.split(" ")[4]);
+        var dayOfWeek = _this.weekOptionsList.find(function (e) {
+          return e.value === Number(_this.props.value.split(" ")[4]);
+        });
+
+        return /*#__PURE__*/_react["default"].createElement("span", null, dayOfWeek.label);
       } else {
         return /*#__PURE__*/_react["default"].createElement("div", {
           className: "time-picker-container"
